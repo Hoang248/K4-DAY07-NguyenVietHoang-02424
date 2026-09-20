@@ -16,10 +16,13 @@ class FixedSizeChunker:
     """
 
     def __init__(self, chunk_size: int = 500, overlap: int = 50) -> None:
+<<<<<<< HEAD
         if chunk_size <= 0:
             raise ValueError("chunk_size must be positive")
         if overlap < 0 or overlap >= chunk_size:
             raise ValueError("overlap must satisfy 0 <= overlap < chunk_size")
+=======
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
         self.chunk_size = chunk_size
         self.overlap = overlap
 
@@ -51,6 +54,7 @@ class SentenceChunker:
         self.max_sentences_per_chunk = max(1, max_sentences_per_chunk)
 
     def chunk(self, text: str) -> list[str]:
+<<<<<<< HEAD
         if not text or not text.strip():
             return []
 
@@ -70,6 +74,10 @@ class SentenceChunker:
             " ".join(sentences[index : index + self.max_sentences_per_chunk]).strip()
             for index in range(0, len(sentences), self.max_sentences_per_chunk)
         ]
+=======
+        # TODO: split into sentences, group into chunks
+        raise NotImplementedError("Implement SentenceChunker.chunk")
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 
 class RecursiveChunker:
@@ -87,6 +95,7 @@ class RecursiveChunker:
         self.chunk_size = chunk_size
 
     def chunk(self, text: str) -> list[str]:
+<<<<<<< HEAD
         if not text or not text.strip():
             return []
         return self._split(text.strip(), list(self.separators))
@@ -142,6 +151,14 @@ class RecursiveChunker:
 
         flush(buffer)
         return chunks
+=======
+        # TODO: implement recursive splitting strategy
+        raise NotImplementedError("Implement RecursiveChunker.chunk")
+
+    def _split(self, current_text: str, remaining_separators: list[str]) -> list[str]:
+        # TODO: recursive helper used by RecursiveChunker.chunk
+        raise NotImplementedError("Implement RecursiveChunker._split")
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 
 def _dot(a: list[float], b: list[float]) -> float:
@@ -156,17 +173,23 @@ def compute_similarity(vec_a: list[float], vec_b: list[float]) -> float:
 
     Returns 0.0 if either vector has zero magnitude.
     """
+<<<<<<< HEAD
     norm_a = math.sqrt(_dot(vec_a, vec_a))
     norm_b = math.sqrt(_dot(vec_b, vec_b))
     if norm_a == 0.0 or norm_b == 0.0:
         return 0.0
     return _dot(vec_a, vec_b) / (norm_a * norm_b)
+=======
+    # TODO: implement cosine similarity formula
+    raise NotImplementedError("Implement compute_similarity")
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 
 class ChunkingStrategyComparator:
     """Run all built-in chunking strategies and compare their results."""
 
     def compare(self, text: str, chunk_size: int = 200) -> dict:
+<<<<<<< HEAD
         strategies = {
             "fixed_size": FixedSizeChunker(
                 chunk_size=chunk_size,
@@ -184,3 +207,7 @@ class ChunkingStrategyComparator:
                 "chunks": chunks,
             }
         return comparison
+=======
+        # TODO: call each chunker, compute stats, return comparison dict
+        raise NotImplementedError("Implement ChunkingStrategyComparator.compare")
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639

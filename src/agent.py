@@ -14,6 +14,7 @@ class KnowledgeBaseAgent:
     """
 
     def __init__(self, store: EmbeddingStore, llm_fn: Callable[[str], str]) -> None:
+<<<<<<< HEAD
         self.store = store
         self.llm_fn = llm_fn
 
@@ -40,3 +41,11 @@ class KnowledgeBaseAgent:
             "Answer:"
         )
         return self.llm_fn(prompt)
+=======
+        # TODO: store references to store and llm_fn
+        pass
+
+    def answer(self, question: str, top_k: int = 3) -> str:
+        # TODO: retrieve chunks, build prompt, call llm_fn
+        raise NotImplementedError("Implement KnowledgeBaseAgent.answer")
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639

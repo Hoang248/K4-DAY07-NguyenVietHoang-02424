@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 doc_id: "return-refund-policy"
 title: "Quy định chung về trả hàng và hoàn tiền"
 source_url: "https://help.shopee.vn/portal/4/article/188931"
@@ -51,3 +52,22 @@ Từ ngày **24/11/2025**, lý do này áp dụng cho người mua hạng Kim C�
 - Voucher Shopee Live, Video Voucher, voucher người dùng mới Shopee, ShopeePay hoặc SPayLater không được hoàn nếu đã hết hiệu lực hoặc hết lượt sử dụng. Shop Voucher và mã miễn phí vận chuyển không được hoàn.
 - Mã giảm giá được hoàn trong vòng **48 giờ** (không kể thứ Bảy, Chủ Nhật và ngày lễ) kể từ khi yêu cầu được chấp nhận hoàn tiền. Shopee Xu được hoàn ngay sau khi khiếu nại hoàn tất và yêu cầu hoàn tiền được chấp nhận.
 
+=======
+doc_id: return-refund-policy
+title: Chính sách đổi trả và hoàn tiền
+audience: buyer               # buyer | seller | both
+category: returns-policy
+language: vi
+source_url: https://example.com/policy/returns
+retrieved_at: 2026-09-18
+document_version: "not-stated"
+---
+
+> Khối metadata phía trên là **template mẫu** cho K4-L3B (bắt buộc: `audience` + `source_url` + `retrieved_at` + `document_version`, cùng ít nhất một trường hữu ích khác như `category`). Thay bằng nguồn công khai thật của nhóm trước khi dùng làm benchmark.
+
+# Chính sách đổi trả và hoàn tiền (dữ liệu khởi động)
+
+Người mua có thể yêu cầu đổi trả trong một khoảng thời gian nhất định kể từ ngày nhận hàng, với điều kiện sản phẩm còn nguyên tem/nhãn và chưa qua sử dụng.
+
+Nhóm cần bổ sung thời hạn cụ thể, điều kiện ngoại lệ (hàng giảm giá, hàng dễ hư hỏng) và quy trình hoàn tiền từ nguồn chính thức trước khi dùng làm benchmark.
+>>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
