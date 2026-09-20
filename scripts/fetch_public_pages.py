@@ -164,11 +164,7 @@ def build_metadata(row: dict[str, str], final_url: str, title: str) -> dict[str,
         "retrieved_at": date.today().isoformat(),
         "document_version": row.get("document_version") or "not-stated",
     }
-<<<<<<< HEAD
     excluded = {"url", "doc_id", "title", "document_version"}
-=======
-    excluded = {"url", "doc_id", "title", "document_version", "license_or_permission"}
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
     metadata.update({key: value for key, value in row.items() if key not in excluded and value and SAFE_METADATA_KEY.match(key)})
     return metadata
 
@@ -220,22 +216,14 @@ def main() -> int:
                 raise FileExistsError(f"{output_path} exists (use --overwrite to replace it)")
             output_path.write_text(markdown_document(metadata, content), encoding="utf-8")
             manifest[metadata["doc_id"]] = {
-<<<<<<< HEAD
                 "doc_id": metadata["doc_id"], "file_path": str(output_path).replace("\\", "/"), "title": metadata["title"],
-=======
-                "doc_id": metadata["doc_id"], "file_path": str(output_path), "title": metadata["title"],
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
                 "source_url": metadata["source_url"], "retrieved_at": metadata["retrieved_at"],
                 "document_version": metadata["document_version"],
                 "license_or_permission": row.get("license_or_permission") or "public-source",
             }
             successful += 1
             print(f"Saved {output_path}")
-<<<<<<< HEAD
         except (HTTPError, URLError, TimeoutError, UnicodeError, LookupError, ValueError, OSError) as error:
-=======
-        except (HTTPError, URLError, TimeoutError, UnicodeError, ValueError, OSError) as error:
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
             failed += 1
             print(f"Skipping {url}: {error}", file=sys.stderr)
     write_manifest(manifest_path, manifest)
@@ -245,3 +233,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

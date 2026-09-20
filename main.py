@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-<<<<<<< HEAD
 import re
 import sys
 from pathlib import Path
@@ -11,12 +10,6 @@ try:
 except ImportError:  # Optional for the mock-embedding manual demo.
     def load_dotenv(*args, **kwargs):
         return False
-=======
-import sys
-from pathlib import Path
-
-from dotenv import load_dotenv
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 from src.agent import KnowledgeBaseAgent
 from src.embeddings import (
@@ -32,7 +25,6 @@ from src.embeddings import (
 from src.models import Document
 from src.store import EmbeddingStore
 
-<<<<<<< HEAD
 ROOT = Path(__file__).resolve().parent
 CORPUS_DIR = ROOT / "data" / "etsy-policies"
 SAMPLE_FILES = [str(path) for path in sorted(CORPUS_DIR.glob("*.md"))]
@@ -52,16 +44,6 @@ def _parse_frontmatter(raw: str) -> tuple[dict[str, str], str]:
             value = value[1:-1].replace('\\"', '"').replace('\\\\', '\\')
         metadata[match.group(1)] = value
     return metadata, parts[2].strip()
-=======
-SAMPLE_FILES = [
-    "data/python_intro.txt",
-    "data/vector_store_notes.md",
-    "data/rag_system_design.md",
-    "data/customer_support_playbook.txt",
-    "data/chunking_experiment_report.md",
-    "data/vi_retrieval_notes.md",
-]
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 
 def load_documents_from_files(file_paths: list[str]) -> list[Document]:
@@ -80,7 +62,6 @@ def load_documents_from_files(file_paths: list[str]) -> list[Document]:
             print(f"Skipping missing file: {path}")
             continue
 
-<<<<<<< HEAD
         metadata, content = _parse_frontmatter(path.read_text(encoding="utf-8"))
         metadata = {**metadata, "file_path": str(path)}
         documents.append(
@@ -88,14 +69,6 @@ def load_documents_from_files(file_paths: list[str]) -> list[Document]:
                 id=metadata.get("doc_id", path.stem),
                 content=content,
                 metadata={**metadata, "source": str(path), "extension": path.suffix.lower()},
-=======
-        content = path.read_text(encoding="utf-8")
-        documents.append(
-            Document(
-                id=path.stem,
-                content=content,
-                metadata={"source": str(path), "extension": path.suffix.lower()},
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
             )
         )
 
@@ -110,11 +83,7 @@ def demo_llm(prompt: str) -> str:
 
 def run_manual_demo(question: str | None = None, sample_files: list[str] | None = None) -> int:
     files = sample_files or SAMPLE_FILES
-<<<<<<< HEAD
     query = question or "What conditions must be met before a buyer can open a case on Etsy?"
-=======
-    query = question or "Summarize the key information from the loaded files."
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
     print("=== Manual File Test ===")
     print("Accepted file types: .md, .txt")
@@ -175,14 +144,12 @@ def run_manual_demo(question: str | None = None, sample_files: list[str] | None 
 
 
 def main() -> int:
-<<<<<<< HEAD
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
-=======
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
     question = " ".join(sys.argv[1:]).strip() if len(sys.argv) > 1 else None
     return run_manual_demo(question=question)
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

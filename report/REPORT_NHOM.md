@@ -1,17 +1,9 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-<<<<<<< HEAD
 **Nhóm:** 3Kings
 **Thành viên:** Lê Minh Sang, Nguyễn Việt Hoàng, Nguyễn Tiến Phát
 **Domain:** Etsy Marketplace — Returns, Refunds, Cases & Purchase Protection
 **Ngày:** 2026-09-20
-=======
-**Nhóm:** [Tên nhóm]
-**Thành viên:** [Họ tên từng thành viên]
-**Ngày:** [Ngày nộp]
-
-> **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 **Tổng điểm phần nhóm: 40** = Lựa chọn tài liệu (10) + Thiết kế chiến lược (15) + Chất lượng truy xuất (10) + Thuyết trình (5).
 
@@ -19,7 +11,6 @@
 
 ## 1. Lựa chọn tài liệu (Document Set Quality) — Nhóm (10 điểm)
 
-<<<<<<< HEAD
 ### Chủ đề (Domain) & Lý do chọn
 
 **Chủ đề:** Chính sách Etsy Help Center về giao hàng, hoàn tiền, đổi trả, case và Purchase Protection.
@@ -61,41 +52,11 @@ Nhóm chọn một lát cắt customer-support có điều kiện, thời hạn 
 | `category` | string | `purchase-protection` | Có thể thu hẹp không gian tìm kiếm theo chủ đề. |
 | `language` | string | `en` | Hỗ trợ lọc/ngữ cảnh đa ngôn ngữ sau này. |
 | `license_or_permission` | string | `public-source` | Ghi nhận nguồn công khai và ranh giới sử dụng. |
-=======
-### Chủ đề (Domain) & Lý Do Chọn
-
-**Chủ đề:** [ví dụ: Customer support FAQ, Luật Việt Nam, công thức nấu ăn, ...]
-
-**Tại sao nhóm chọn chủ đề này?**
-> *Viết 2-3 câu:*
-
-### Danh sách tài liệu (Data Inventory)
-
-| # | Tên tài liệu | Nguồn (Source URL) | Ngày lấy / Phiên bản | Số ký tự | Metadata đã gán |
-|---|--------------|------------|--------------------|----------|-----------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
-
-**Danh sách kiểm tra quản trị dữ liệu (Data governance checklist):**
-- [ ] Tập tài liệu (Corpus) chỉ chứa nguồn công khai/được phép dùng và không chứa dữ liệu cá nhân, thông tin đăng nhập hoặc tài liệu nội bộ.
-- [ ] Mỗi tài liệu có `source_url`, `retrieved_at`, `document_version` (hoặc ngày hiệu lực) trong metadata.
-
-### Cấu trúc Metadata (Metadata Schema)
-
-| Trường metadata | Kiểu | Ví dụ giá trị | Tại sao hữu ích cho truy xuất (retrieval)? |
-|----------------|------|---------------|-------------------------------|
-| | | | |
-| | | | |
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 ---
 
 ## 2. Thiết kế chiến lược (Strategy Design) — Nhóm (15 điểm)
 
-<<<<<<< HEAD
 ### Phân tích đường cơ sở (Baseline Analysis)
 
 | Tài liệu | Strategy | Số chunk | Độ dài TB | Giữ ngữ cảnh? |
@@ -160,58 +121,11 @@ for path, body in self.sections(text):
 | Đối chứng | FixedSize 800 / overlap 0 | 35 | 7 | Ít chunk, chi phí thấp. | Mất thông tin ở ranh giới; kết quả giảm mạnh. |
 
 **Chiến lược tốt nhất cho chủ đề này:** FixedSize có overlap là lựa chọn tốt nhất theo benchmark kiểm soát (10/10 marker-content). Hai đối chứng gợi ý overlap là biến quan trọng hơn riêng kích thước: `500/50 = 9/10`, còn `800/0 = 7/10`. Tuy nhiên, nếu ưu tiên câu trả lời có nguồn/mục dễ đọc, hướng production hợp lý là hybrid: giữ Heading/Section làm ranh giới chính và chèn overlap 1–2 câu giữa các section, sau đó rerank có xét heading.
-=======
-> Mỗi thành viên thử **một chiến lược khác nhau** trên cùng bộ tài liệu; nhóm tổng hợp và so sánh ở đây.
-
-### Phân tích đường cơ sở (Baseline Analysis)
-
-Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
-
-| Tài liệu | Chiến lược (Strategy) | Số lượng Chunk | Độ dài trung bình | Giữ được ngữ cảnh không? |
-|-----------|----------|-------------|------------|-------------------|
-| | FixedSizeChunker (`fixed_size`) | | | |
-| | SentenceChunker (`by_sentences`) | | | |
-| | RecursiveChunker (`recursive`) | | | |
-
-### Chiến lược của từng thành viên
-
-> Mỗi thành viên điền một khối dưới đây (copy thêm nếu nhóm có nhiều hơn 3 người).
-
-**Thành viên 1 — [Tên]**
-- **Loại chiến lược:** [FixedSize / Sentence / Recursive / custom]
-- **Mô tả & lý do chọn cho chủ đề này:** *(2-3 câu)*
-- **Code snippet (nếu custom):**
-```python
-# Dán mã nguồn (implementation) vào đây
-```
-
-**Thành viên 2 — [Tên]**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
-- **Code snippet (nếu custom):**
-
-**Thành viên 3 — [Tên]**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
-- **Code snippet (nếu custom):**
-
-### So Sánh Giữa Các Thành Viên
-
-| Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
-|-----------|----------|----------------------|-----------|----------|
-| | | | | |
-| | | | | |
-| | | | | |
-
-**Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
-> *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 ---
 
 ## 3. Câu hỏi đánh giá & Chất lượng truy xuất (Retrieval Quality) — Nhóm (10 điểm)
 
-<<<<<<< HEAD
 ### Câu hỏi đánh giá và câu trả lời chuẩn
 
 Năm query được giữ nguyên wording từ `R2_HOANG_5_BENCHMARK_QUERIES_GOLD.md`. Q1–Q5 lần lượt kiểm tra điều kiện, quy trình, câu trả lời theo audience, công thức, và số + quy trình. Q3 bắt buộc chạy ba lần: `audience=buyer`, không filter, `audience=seller`.
@@ -251,40 +165,11 @@ Run Gemini độc lập của Hoàng cho cùng hiện tượng: buyer `full refu
 ### Cách đọc điểm benchmark
 
 Benchmark nhóm chấm **retrieval evidence**: một query đạt khi top-3 chứa chunk có gold marker và phần tóm tắt chỉ tổng hợp thông tin có trong các chunk đó. Artifact đối chứng của Phát ghi `llm: stub`, vì vậy nhóm không dùng nó để tuyên bố chất lượng LLM sinh văn bản. Đây là lựa chọn có chủ đích: mục tiêu phần nhóm là so sánh chunking, metadata và thứ hạng trên cùng corpus; `KnowledgeBaseAgent` vẫn được cài đặt, unit test ở phần cá nhân, nhưng không phải một dependency của benchmark này.
-=======
-### Câu hỏi đánh giá & Câu trả lời chuẩn (nhóm thống nhất)
-
-> **Đúng 5 câu hỏi**, đa dạng, có thể kiểm chứng; **ít nhất 1 câu** cần lọc metadata mới trả lời tốt. Đây là bộ câu hỏi chung cho mọi thành viên chạy.
-
-| # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
-|---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-
-### Tổng hợp chất lượng truy xuất của nhóm
-
-> Cách chấm (theo `docs/SCORING.md`): **2 điểm/câu** — top-3 chứa chunk liên quan + agent trả lời đúng (2), có liên quan nhưng thiếu/không ở top-1 (1), không có trong top-3 (0).
-
-| # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
-|---|---------|-------------------------------|-------------------------------|---------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
-
-**Lọc bằng metadata có giúp ích không? Ở câu hỏi nào?**
-> *Viết 2-3 câu:*
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
 
 ---
 
 ## 4. Thuyết trình (Demo) & Bài học nhóm — Nhóm (5 điểm)
 
-<<<<<<< HEAD
 ### Các insight sẽ trình bày
 
 1. **Đúng file chưa chắc đúng answer-bearing chunk.** Heading/Section có doc-level top-1 cho 5/5, nhưng chấm marker-content chỉ 8/10: Q1 marker `48 hours` ở rank 3, Q4 `carrier transit time` ở rank 2. Vì vậy nhóm chấm cả `doc_id` lẫn marker, không chỉ “đúng tài liệu”.
@@ -318,25 +203,4 @@ Nhóm sẽ giữ bản chép sát nguồn và heading gốc để gold/marker tr
 | Chất lượng truy xuất (Retrieval Quality) | 10 / 10 | 5/5 primary query có chunk liên quan trong top-3; controlled FixedSize có marker ở top-1 5/5, kèm A/B metadata Q3. |
 | Thuyết trình (Demo) | 5 / 5 | Có flow 5 bước, A/B hiển thị được, failure case và số liệu so sánh tái lập từ freeze artifact. |
 | **Tổng phần nhóm** | **40 / 40** | Tự đánh giá dựa trên artifact retrieval, baseline, A/B và kịch bản demo đã ghi trong báo cáo. |
-=======
-**Những phân tích (insights) hay nhất nhóm sẽ trình bày:**
-> *Liệt kê 2-3 ý:*
 
-**Bài học rút ra khi so sánh trong nhóm:**
-> *Viết 2-3 câu — cùng tài liệu nhưng chiến lược khác nhau dẫn tới khác biệt gì?*
-
-**Nếu làm lại, nhóm sẽ thay đổi gì trong chiến lược dữ liệu (data strategy)?**
-> *Viết 2-3 câu:*
-
----
-
-## Tự Đánh Giá (Phần Nhóm)
-
-| Tiêu chí | Điểm tự đánh giá |
-|----------|-------------------|
-| Lựa chọn tài liệu (Document Set Quality) | / 10 |
-| Thiết kế chiến lược (Strategy Design) | / 15 |
-| Chất lượng truy xuất (Retrieval Quality) | / 10 |
-| Thuyết trình (Demo) | / 5 |
-| **Tổng phần nhóm** | **/ 40** |
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639

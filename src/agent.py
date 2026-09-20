@@ -14,23 +14,22 @@ class KnowledgeBaseAgent:
     """
 
     def __init__(self, store: EmbeddingStore, llm_fn: Callable[[str], str]) -> None:
-<<<<<<< HEAD
         self.store = store
         self.llm_fn = llm_fn
 
     def answer(self, question: str, top_k: int = 3) -> str:
         results = self.store.search(question, top_k=top_k)
-        if results:
-            context = "\n\n".join(
-                (
-                    f"[Context {index}] doc_id={result['metadata'].get('doc_id', result['id'])} "
-                    f"source={result['metadata'].get('source_url', result['metadata'].get('file_path', 'unknown'))}\n"
-                    f"{result['content']}"
-                )
-                for index, result in enumerate(results, start=1)
+        if not results:
+            return "Không tìm thấy thông tin phù hợp trong knowledge base."
+
+        context = "\n\n".join(
+            (
+                f"[{index}] doc_id={result['metadata'].get('doc_id', result['id'])} "
+                f"source={result['metadata'].get('source_url', result['metadata'].get('file_path', 'unknown'))}\n"
+                f"{result['content']}"
             )
-        else:
-            context = "(No relevant context was retrieved.)"
+            for index, result in enumerate(results, start=1)
+        )
 
         prompt = (
             "Answer the question using only the provided context. "
@@ -41,11 +40,3 @@ class KnowledgeBaseAgent:
             "Answer:"
         )
         return self.llm_fn(prompt)
-=======
-        # TODO: store references to store and llm_fn
-        pass
-
-    def answer(self, question: str, top_k: int = 3) -> str:
-        # TODO: retrieve chunks, build prompt, call llm_fn
-        raise NotImplementedError("Implement KnowledgeBaseAgent.answer")
->>>>>>> e05a3a610f763dc292c285e48aff812c6b564639
