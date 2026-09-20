@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+.cache/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+.omx/
+.venv/
+src_w_solution/
+
+# Instructor-only notes (chứa gợi ý/đáp án chấm bài, không public cho học viên)
+docs/INSTRUCTOR_GUIDE.md

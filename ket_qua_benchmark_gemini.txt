@@ -1,0 +1,100 @@
+strategy=recursive
+embedding=gemini
+chunks=48
+chunks_by_document=buyer-estimated-delivery:4, buyer-help-order:4, buyer-open-case:8, buyer-purchase-protection:3, seller-issue-refund:5, seller-purchase-protection:6, seller-resolve-case:7, seller-returns-refunds:4, seller-set-return-policy:7
+
+[Q1] type=condition What conditions must be met before a buyer can open a case on Etsy?
+gold=To open a case, the estimated delivery date for the order must have passed and at least 48 hours must have passed since the buyer sent the seller a Help with order request.
+gold_source_files=buyer-estimated-delivery.md,buyer-open-case.md
+answer_marker=48 hours
+metadata_filter={'audience': 'buyer'}
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['buyer-open-case#0', 'buyer-open-case#3']
+top3:
+  1. -- score=0.8552 chunk=buyer-open-case#2 doc_id=buyer-open-case audience=buyer | To open a case, you must have an Etsy account. If you ordered as a guest, create an Etsy account and link your order. ## Case types - Non-delivery: you paid for an order but did no
+  2. MATCH score=0.8098 chunk=buyer-open-case#0 doc_id=buyer-open-case audience=buyer | # How to Open a Case ## Quick answer If the order's maximum estimated delivery date has passed and you contacted the seller more than 48 hours ago, you can select Open a case. You 
+  3. MATCH score=0.7968 chunk=buyer-open-case#3 doc_id=buyer-open-case audience=buyer | - The estimated delivery date provided at purchase has passed. - At least 48 hours have passed since you sent the seller a Help with order request. For digital items made to order:
+A/B without metadata filter:
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['seller-resolve-case#1']
+  1. -- score=0.8552 chunk=buyer-open-case#2 doc_id=buyer-open-case audience=buyer | To open a case, you must have an Etsy account. If you ordered as a guest, create an Etsy account and link your order. ## Case types - Non-delivery: you paid for an order but did no
+  2. -- score=0.8303 chunk=seller-resolve-case#0 doc_id=seller-resolve-case audience=seller | # How to Resolve a Case from a Buyer Cases indicate that a buyer has an unresolved issue with an order. A case does not necessarily count against a shop when the seller meets Etsy’
+  3. MATCH score=0.8114 chunk=seller-resolve-case#1 doc_id=seller-resolve-case audience=seller | - Non-delivery: the order did not arrive. - Not as described: the received item was not what the listing described. - Item arrived damaged. - Item arrived 7+ days after its maximum
+
+[Q2] type=procedure How does a seller work with a buyer to resolve an open Etsy case through Shop Manager?
+gold=The seller uses Cases in Shop Manager, selects the applicable case, and communicates through Add Your Comment in the case log.
+gold_source_files=seller-resolve-case.md
+answer_marker=Shop Manager
+metadata_filter={'audience': 'seller'}
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['seller-resolve-case#4', 'seller-purchase-protection#5', 'seller-resolve-case#3']
+top3:
+  1. MATCH score=0.8517 chunk=seller-resolve-case#4 doc_id=seller-resolve-case audience=seller | 1. Sign in to Etsy.com and go to Shop Manager. 2. Go to Help and then Cases. 3. Go to the Cases reported about your shop tab and select the applicable case ID. 4. Use Add Your Comm
+  2. MATCH score=0.8188 chunk=seller-purchase-protection#5 doc_id=seller-purchase-protection audience=seller | For an item never received or arriving 7+ days after the estimated delivery window, Etsy may already have all required information. If a case is still open for an item never receiv
+  3. MATCH score=0.8157 chunk=seller-resolve-case#3 doc_id=seller-resolve-case audience=seller | Etsy Purchase Protection is not an insurance policy, warranty, or guarantee. Etsy decides in its sole discretion whether a transaction receives protection. Etsy may resolve the cas
+A/B without metadata filter:
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['seller-resolve-case#4', 'seller-purchase-protection#5', 'seller-resolve-case#3']
+  1. MATCH score=0.8517 chunk=seller-resolve-case#4 doc_id=seller-resolve-case audience=seller | 1. Sign in to Etsy.com and go to Shop Manager. 2. Go to Help and then Cases. 3. Go to the Cases reported about your shop tab and select the applicable case ID. 4. Use Add Your Comm
+  2. MATCH score=0.8188 chunk=seller-purchase-protection#5 doc_id=seller-purchase-protection audience=seller | For an item never received or arriving 7+ days after the estimated delivery window, Etsy may already have all required information. If a case is still open for an item never receiv
+  3. MATCH score=0.8157 chunk=seller-resolve-case#3 doc_id=seller-resolve-case audience=seller | Etsy Purchase Protection is not an insurance policy, warranty, or guarantee. Etsy decides in its sole discretion whether a transaction receives protection. Etsy may resolve the cas
+
+[Q3] type=list How much refund does Etsy Purchase Protection provide for a qualifying order?
+gold=Etsy’s Purchase Protection program provides a full refund for qualifying orders when an item doesn’t arrive, arrives damaged, arrives 7+ days after the maximum estimated delivery date window provided at checkout, or differs significantly from the item description or photos.
+gold_source_files=buyer-purchase-protection.md
+answer_marker=full refund
+metadata_filter={'audience': 'buyer'}
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['buyer-purchase-protection#0', 'buyer-open-case#4']
+top3:
+  1. MATCH score=0.8459 chunk=buyer-purchase-protection#0 doc_id=buyer-purchase-protection audience=buyer | # Etsy Purchase Protection Program ## Qualifying order issues Etsy’s Purchase Protection program provides a full refund for qualifying orders when an item: - Doesn’t arrive. - Arri
+  2. MATCH score=0.7751 chunk=buyer-open-case#4 doc_id=buyer-open-case audience=buyer | Explain why you are contacting the seller and your desired resolution. Include order details and photos if the item is damaged or different from what you ordered. ## How Etsy will 
+  3. -- score=0.7450 chunk=buyer-purchase-protection#2 doc_id=buyer-purchase-protection audience=buyer | Items that arrive late due to forces outside the seller’s control, such as a carrier strike, severe weather, war, civil unrest, or similar event, do not qualify. ## I purchased as 
+A/B without metadata filter:
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['buyer-purchase-protection#0', 'seller-resolve-case#2']
+  1. -- score=0.8517 chunk=seller-purchase-protection#0 doc_id=seller-purchase-protection audience=seller | # Purchase Protection for Sellers If an order is eligible for Etsy Purchase Protection, Etsy covers up to $250 of a refund, or the converted equivalent in the seller’s local curren
+  2. MATCH score=0.8459 chunk=buyer-purchase-protection#0 doc_id=buyer-purchase-protection audience=buyer | # Etsy Purchase Protection Program ## Qualifying order issues Etsy’s Purchase Protection program provides a full refund for qualifying orders when an item: - Doesn’t arrive. - Arri
+  3. MATCH score=0.8251 chunk=seller-resolve-case#2 doc_id=seller-resolve-case audience=seller | Etsy reviews the order and makes a resolution. If the order is eligible for Purchase Protection, the buyer receives a full refund. Etsy covers up to $250, or the converted equivale
+A/B contrast metadata filter={'audience': 'seller'}:
+gold_doc_in_top3=False answer_span_in_top3=True
+matching_chunks=['seller-resolve-case#2']
+  1. -- score=0.8517 chunk=seller-purchase-protection#0 doc_id=seller-purchase-protection audience=seller | # Purchase Protection for Sellers If an order is eligible for Etsy Purchase Protection, Etsy covers up to $250 of a refund, or the converted equivalent in the seller’s local curren
+  2. MATCH score=0.8251 chunk=seller-resolve-case#2 doc_id=seller-resolve-case audience=seller | Etsy reviews the order and makes a resolution. If the order is eligible for Purchase Protection, the buyer receives a full refund. Etsy covers up to $250, or the converted equivale
+  3. -- score=0.7849 chunk=seller-purchase-protection#2 doc_id=seller-purchase-protection audience=seller | Buyers are responsible for customs duties, import duties, or other government charges payable on delivery. Items late or not received because of buyer delay or refusal to pay those
+
+[Q4] type=formula Which components are used to calculate an Etsy estimated delivery date?
+gold=Processing time plus carrier transit time equals the estimated delivery date.
+gold_source_files=buyer-estimated-delivery.md
+answer_marker=carrier transit time
+metadata_filter={'audience': 'buyer'}
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['buyer-estimated-delivery#1']
+top3:
+  1. MATCH score=0.8331 chunk=buyer-estimated-delivery#1 doc_id=buyer-estimated-delivery audience=buyer | The estimated delivery date is based on the processing time for the items and the transit time for the shipping carrier. Processing time + carrier transit time = estimated delivery
+  2. -- score=0.7844 chunk=buyer-estimated-delivery#2 doc_id=buyer-estimated-delivery audience=buyer | 1. Select an item. 2. Scroll to Shipping and return policies. 3. Find Order today to get by with a date range. On the Etsy app: 1. Select an item. 2. Scroll to Shipping & policies.
+  3. -- score=0.7711 chunk=buyer-estimated-delivery#0 doc_id=buyer-estimated-delivery audience=buyer | # What is an Estimated Delivery Date? ## Quick answer To open a case, the estimated delivery date for the order must have passed and at least 48 hours must have passed since the bu
+A/B without metadata filter:
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['buyer-estimated-delivery#1']
+  1. MATCH score=0.8331 chunk=buyer-estimated-delivery#1 doc_id=buyer-estimated-delivery audience=buyer | The estimated delivery date is based on the processing time for the items and the transit time for the shipping carrier. Processing time + carrier transit time = estimated delivery
+  2. -- score=0.7844 chunk=buyer-estimated-delivery#2 doc_id=buyer-estimated-delivery audience=buyer | 1. Select an item. 2. Scroll to Shipping and return policies. 3. Find Order today to get by with a date range. On the Etsy app: 1. Select an item. 2. Scroll to Shipping & policies.
+  3. -- score=0.7711 chunk=buyer-estimated-delivery#0 doc_id=buyer-estimated-delivery audience=buyer | # What is an Estimated Delivery Date? ## Quick answer To open a case, the estimated delivery date for the order must have passed and at least 48 hours must have passed since the bu
+
+[Q5] type=numeric + procedure How can a seller issue a full or partial refund, and what is the Etsy Payments time limit?
+gold=The seller uses Shop Manager to issue the refund; Etsy Payments refunds can be issued after processing and before 180 days have passed.
+gold_source_files=seller-issue-refund.md
+answer_marker=180 days
+metadata_filter={'audience': 'seller'}
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['seller-issue-refund#3']
+top3:
+  1. MATCH score=0.8098 chunk=seller-issue-refund#3 doc_id=seller-issue-refund audience=seller | If you use Etsy Payments, you can issue a refund after the payment is processed and before 180 days after the payment is processed. After 180 days, you cannot refund an order throu
+  2. -- score=0.7966 chunk=seller-issue-refund#0 doc_id=seller-issue-refund audience=seller | # How to Issue a Full or Partial Refund For an Order You can issue a full or partial refund for an order in your Shop Manager. ## To refund an order 1. On Etsy.com, open Shop Manag
+  3. -- score=0.7717 chunk=seller-issue-refund#1 doc_id=seller-issue-refund audience=seller | ## What can I issue a refund for? You can issue a refund in accordance with your shop policies. You can also issue refunds if: - You agree to issue a refund to the buyer. - The buy
+A/B without metadata filter:
+gold_doc_in_top3=True answer_span_in_top3=True
+matching_chunks=['seller-issue-refund#3', 'buyer-open-case#6']
+  1. MATCH score=0.8098 chunk=seller-issue-refund#3 doc_id=seller-issue-refund audience=seller | If you use Etsy Payments, you can issue a refund after the payment is processed and before 180 days after the payment is processed. After 180 days, you cannot refund an order throu
+  2. -- score=0.7966 chunk=seller-issue-refund#0 doc_id=seller-issue-refund audience=seller | # How to Issue a Full or Partial Refund For an Order You can issue a full or partial refund for an order in your Shop Manager. ## To refund an order 1. On Etsy.com, open Shop Manag
+  3. MATCH score=0.7868 chunk=buyer-open-case#6 doc_id=buyer-open-case audience=buyer | A case closes automatically when a full refund is issued or when the buyer contacts a card provider or PayPal to dispute the charge. ## How refunds work If Etsy determines that an 
